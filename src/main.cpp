@@ -1,21 +1,33 @@
 #include <SFML/Graphics.hpp>
 
-int main(){
-  sf::RenderWindow window(sf::VideoMode({200, 200}), "SFML works!");
-  sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
+int main() {
+    // Window
+    sf::RenderWindow window(sf::VideoMode({640, 360}), "Cyber Fortress");
+    sf::Event event;
 
-  while (window.isOpen()){
-      sf::Event event;
-      while (window.pollEvent(event)){
-      if (event.type == sf::Event::Closed){
-        window.close();
-      }
+    // Game loop
+    while (window.isOpen()) {
+        // Check for events
+        while (window.pollEvent(event)) {
+            // Handle events
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    if (event.key.code == sf::Keyboard::Escape) {
+                        window.close();
+                    }
+                    break;
+            }
+        }
+        // Update
+
+
+        // Render
+        window.clear();
+        window.display();
     }
-    window.clear();
-    window.draw(shape);
-    window.display();
-  }
-  return 0;
+    return 0;
 }
 
