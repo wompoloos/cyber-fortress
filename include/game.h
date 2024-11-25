@@ -30,7 +30,7 @@ public:
 	virtual ~Game();
 
 	// Accessors
-	const bool running() const;
+	const bool isRunning() const;
 
 	// Poll events
 	void pollEvents();

@@ -26,10 +26,11 @@ Game::~Game() {
 }
 
 // Accessors
-const bool Game::running() const {
+const bool Game::isRunning() const {
 	return this->window->isOpen();
 }
 
+// Poll events
 void Game::pollEvents() {
     // Check for events
     while (this->window->pollEvent(this->event)) {
