@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -30,7 +29,7 @@ public:
 	virtual ~Game();
 
 	// Accessors
-	const bool running() const;
+	const bool isRunning() const;
 
 	// Poll events
 	void pollEvents();
