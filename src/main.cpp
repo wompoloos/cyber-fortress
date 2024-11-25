@@ -1,32 +1,16 @@
-#include <SFML/Graphics.hpp>
+# include "game.h"
 
 int main() {
-    // Window
-    sf::RenderWindow window(sf::VideoMode({640, 360}), "Cyber Fortress");
-    sf::Event event;
+    // Init game engine
+    Game game;
 
     // Game loop
-    while (window.isOpen()) {
-        // Check for events
-        while (window.pollEvent(event)) {
-            // Handle events
-            switch (event.type) {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-                case sf::Event::KeyPressed:
-                    if (event.key.code == sf::Keyboard::Escape) {
-                        window.close();
-                    }
-                    break;
-            }
-        }
+    while (game.running()) {
         // Update
-
+        game.update();
 
         // Render
-        window.clear();
-        window.display();
+        game.render();
     }
     return 0;
 }
