@@ -7,13 +7,12 @@
 #include <SFML/Graphics.hpp>
 
 /*
-	Wrapper class for game engine
+	Wrapper class for game engine.
+	This class handles the initialization and management of the game window.
 */
 
-class Game
-{
+class Game {
 private:
-	// Variables
 	// Window
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
@@ -24,17 +23,16 @@ private:
 	void initWindow();
 
 public:
-	// Public functions
-	// Constructors
+	// Default constructor
 	Game();
 
-	// Destructors
+	// Virtual destructor
 	virtual ~Game();
 
 	// Accessors
 	const bool running() const;
 
-	// Event polling
+	// Poll events
 	void pollEvents();
 
 	// Update
