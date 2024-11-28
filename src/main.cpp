@@ -6,6 +6,9 @@ int main() {
 
     // Game loop
     while (game.isRunning()) {
+        // Poll events
+        game.pollEvents();
+
         // Update
         game.update();
 
@@ -14,4 +17,3 @@ int main() {
     }
     return 0;
 }
-

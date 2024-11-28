@@ -1,4 +1,5 @@
 #include "game.h"
+#include "splashState.h"
 
 // Private functions
 // Initialise variables
@@ -18,6 +19,9 @@ void Game::initWindow() {
 Game::Game() {
 	this->initVariables();
 	this->initWindow();
+
+    // Initialise first state (SplashState)
+    stateManager.pushState(std::make_unique<SplashState>());
 }
 
 // Destructors
@@ -32,29 +36,15 @@ const bool Game::isRunning() const {
 
 // Poll events
 void Game::pollEvents() {
-    // Check for events
-    while (this->window->pollEvent(this->event)) {
-        // Handle events
-        switch (this->event.type) {
-        case sf::Event::Closed:
-            this->window->close();
-            break;
-        case sf::Event::KeyPressed:
-            if (this->event.key.code == sf::Keyboard::Escape) {
-                this->window->close();
-            }
-            break;
-        }
-    }
+	stateManager.pollEvents(this->window);
 }
 
 // Update
 void Game::update() {
-    this->pollEvents();
+    stateManager.update();
 }
 
 // Render
 void Game::render() {
-    this->window->clear();
-    this->window->display();
+    stateManager.render(this->window);
 }

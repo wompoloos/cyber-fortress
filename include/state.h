@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 /*
 	Abstract base class for state.
 	This class defines the interface for all game states.
@@ -17,12 +19,15 @@ public:
 	virtual void init() = 0;
 
 	// Poll events (to be implemented in derived classes)
-	virtual void pollEvents() = 0;
+	virtual void pollEvents(sf::RenderWindow* window) = 0;
 
 	// Update (to be implemented in derived classes)
 	virtual void update() = 0;
 
 	// Render (to be implemented in derived classes)
-	virtual void render() = 0;
+	virtual void render(sf::RenderWindow* window) = 0;
+
+	// Check if the state is ended (to be implemented in derived classes)
+	virtual bool isEnd() = 0;
 };
 

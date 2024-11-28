@@ -4,6 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "stateManager.h"
 
 /*
 	Wrapper class for game engine.
@@ -15,7 +16,9 @@ private:
 	// Window
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
-	sf::Event event;
+
+	// State manager
+	StateManager stateManager;
 
 	// Private functions
 	void initVariables();
