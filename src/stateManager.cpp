@@ -30,6 +30,14 @@ void StateManager::popState() {
     }
 }
 
+// Change the current state by popping the top state and pushing a new state
+void StateManager::changeState(std::unique_ptr<State> state) {
+    // Remove the current top state if it exists
+    popState();
+    // Push the new state onto the stack
+    pushState(std::move(state));
+}
+
 // Poll events
 void StateManager::pollEvents(sf::RenderWindow* window) {
     if (!states.empty()) {
@@ -41,11 +49,7 @@ void StateManager::pollEvents(sf::RenderWindow* window) {
 void StateManager::update() {
     // Check if there is at least one state to update
     if (!states.empty()) {
-        states.top()->update(); // Call update on the top state
-        // Check if the top state requests to be removed
-        if (states.top()->isEnd()) {
-            popState();
-        }
+        states.top()->update();
     }
 }
 

@@ -21,7 +21,7 @@ Game::Game() {
 	this->initWindow();
 
     // Initialise first state (SplashState)
-    stateManager.pushState(std::make_unique<SplashState>());
+    stateManager.pushState(std::make_unique<SplashState>(stateManager));
 }
 
 // Destructors

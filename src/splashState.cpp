@@ -1,9 +1,11 @@
 #include <iostream>
 #include "splashState.h"
+#include "stateManager.h"
+#include "mainMenustate.h"
 
 // Public functions
 // Constructors
-SplashState::SplashState() {
+SplashState::SplashState(StateManager& stateManager) : stateManager(stateManager) {
 }
 
 // Destructors
@@ -27,6 +29,9 @@ void SplashState::pollEvents(sf::RenderWindow* window) {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
+            if (event.key.code == sf::Keyboard::Enter) {
+                stateManager.changeState(std::make_unique<MainMenuState>(stateManager));
+            }
             break;
         }
     }
@@ -41,9 +46,4 @@ void SplashState::render(sf::RenderWindow* window) {
     std::cout << "Rendering SplashState..." << std::endl;
     window->clear();
     window->display();
-}
-
-// Check if the state is ended
-bool SplashState::isEnd() {
-	return false;
 }

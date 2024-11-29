@@ -26,8 +26,5 @@ public:
 
 	// Render (to be implemented in derived classes)
 	virtual void render(sf::RenderWindow* window) = 0;
-
-	// Check if the state is ended (to be implemented in derived classes)
-	virtual bool isEnd() = 0;
 };
 

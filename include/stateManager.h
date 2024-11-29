@@ -27,6 +27,9 @@ public:
     // Remove the state at the top of the stack
     void popState();
 
+    // Change state
+    void changeState(std::unique_ptr<State> state);
+
     // Poll events
     void pollEvents(sf::RenderWindow* window);
 

@@ -3,22 +3,22 @@
 #include "state.h"
 
 /*
-	This class represents the splash screen state.
+	This class represents the main menu screen state.
 */
 
 // Forward declaration of StateManager class
 class StateManager;
 
-class SplashState : public State {
+class MainMenuState : public State {
 private:
 	StateManager& stateManager;
 
 public:
 	// Constructor with reference to StateManager
-	SplashState(StateManager& stateManager);
+	MainMenuState(StateManager& stateManager);
 
 	// Virtual destructor
-	virtual ~SplashState();
+	virtual ~MainMenuState();
 
 	// Intiliase the state
 	void init() override;
