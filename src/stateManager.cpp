@@ -15,15 +15,18 @@ StateManager::~StateManager() {
 
 // Add a new state to the top of the stack
 void StateManager::pushState(std::unique_ptr<State> state) {
-    states.push(std::move(state)); // Move the unique_ptr into the stack
-    states.top()->init();          // Initialize the new state
+    // Move the unique_ptr into the stack
+    states.push(std::move(state));
+    // Initialize the new state
+    states.top()->init();
 }
 
 // Remove the state at the top of the stack
 void StateManager::popState() {
     // Only pop if there is at least one state in the stack
     if (!states.empty()) {
-        states.pop();           // Remove the top state from the stack
+        // Remove the top state from the stack
+        states.pop();
     }
 }
 

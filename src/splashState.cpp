@@ -39,7 +39,7 @@ void SplashState::update() {
 // Render
 void SplashState::render(sf::RenderWindow* window) {
     std::cout << "Rendering SplashState..." << std::endl;
-    window->clear(); // Clear to black
+    window->clear();
     window->display();
 }
 
