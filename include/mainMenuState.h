@@ -12,6 +12,9 @@ class StateManager;
 class MainMenuState : public State {
 private:
 	StateManager& stateManager;
+	// Options for the menu
+	std::vector<std::string> menuOptions = { "Play", "Options", "Quit" };
+	int menuOptionsIndex = 0;
 
 public:
 	// Constructor with reference to StateManager

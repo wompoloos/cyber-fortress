@@ -28,7 +28,30 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
+            if (event.key.code == sf::Keyboard::Up) {
+                if (menuOptionsIndex > 0) {
+                    menuOptionsIndex--;
+                }
+            }
+            if (event.key.code == sf::Keyboard::Down) {
+                if (menuOptionsIndex < menuOptions.size() - 1) {
+                    menuOptionsIndex++;
+                }
+            }
+            if (event.key.code == sf::Keyboard::Enter) {
+                switch (menuOptionsIndex) {
+                case 0:
+                    std::cout << menuOptions[menuOptionsIndex] << std::endl;
+                    break;
+                case 1:
+                    std::cout << menuOptions[menuOptionsIndex] << std::endl;
+                    break;
+                case 2:
+                    std::cout << menuOptions[menuOptionsIndex] << std::endl;
+                    break;
+                }
             break;
+            }
         }
     }
 }
@@ -39,7 +62,7 @@ void MainMenuState::update() {
 
 // Render
 void MainMenuState::render(sf::RenderWindow* window) {
-    std::cout << "Rendering MainMenuState..." << std::endl;
+    // std::cout << "Rendering MainMenuState..." << std::endl;
     window->clear();
     window->display();
 }
