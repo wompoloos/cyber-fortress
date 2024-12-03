@@ -1,6 +1,7 @@
 #include <iostream>
 #include "mainMenuState.h"
 #include "stateManager.h"
+#include "gamePlayState.h"
 
 // Public functions
 // Constructors
@@ -11,7 +12,7 @@ MainMenuState::MainMenuState(StateManager& stateManager) : stateManager(stateMan
 MainMenuState::~MainMenuState() {
 }
 
-// Intiliase the state
+// Intiliase the state   
 void MainMenuState::init() {
 	std::cout << "Initialisng MainMenuState..." << std::endl;
 }
@@ -42,6 +43,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
                 switch (menuOptionsIndex) {
                 case 0:
                     std::cout << menuOptions[menuOptionsIndex] << std::endl;
+                    stateManager.changeState(std::make_unique<gamePlayState>(stateManager));
                     break;
                 case 1:
                     std::cout << menuOptions[menuOptionsIndex] << std::endl;
@@ -62,6 +64,11 @@ void MainMenuState::update() {
 
 // Render
 void MainMenuState::render(sf::RenderWindow* window) {
+<<<<<<< HEAD
+=======
+    // std::cout << "Rendering MainMenuState..." << std::endl;
+
+>>>>>>> 40a5606e04e3229a32dabf717a5b3de18e8b1827
     window->clear();
     window->display();
 }

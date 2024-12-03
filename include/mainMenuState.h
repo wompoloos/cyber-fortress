@@ -2,6 +2,7 @@
 
 #include "state.h"
 
+
 /*
 	This class represents the main menu screen state.
 */
@@ -15,6 +16,7 @@ private:
 	// Options for the menu
 	std::vector<std::string> menuOptions = { "Play", "Options", "Quit" };
 	int menuOptionsIndex = 0;
+	bool startGame = false;
 
 public:
 	// Constructor with reference to StateManager

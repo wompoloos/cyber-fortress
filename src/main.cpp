@@ -1,5 +1,4 @@
 # include "game.h"
-
 int main() {
     // Init game engine
     Game game;
