@@ -15,6 +15,10 @@ SplashState::~SplashState() {
 // Intiliase the state
 void SplashState::init() {
     std::cout << "Initialisng SplashState..." << std::endl;
+    // Load the splash texture from a file
+    splashTexture.loadFromFile("../res/images/splashScreen.png");
+    // Set the texture for the sprite
+    splashSprite.setTexture(splashTexture);
 }
 
 // Poll events
@@ -43,7 +47,10 @@ void SplashState::update() {
 
 // Render
 void SplashState::render(sf::RenderWindow* window) {
-    std::cout << "Rendering SplashState..." << std::endl;
+    // Clear the window
     window->clear();
+    // Draw the splash sprite
+    window->draw(splashSprite);
+    // Display the window
     window->display();
 }

@@ -12,6 +12,10 @@ class StateManager;
 class SplashState : public State {
 private:
 	StateManager& stateManager;
+	// Texture for the splash image
+	sf::Texture splashTexture;
+	// Sprite for rendering the splash image
+	sf::Sprite splashSprite;
 
 public:
 	// Constructor with reference to StateManager

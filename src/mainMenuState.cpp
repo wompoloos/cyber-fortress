@@ -62,7 +62,6 @@ void MainMenuState::update() {
 
 // Render
 void MainMenuState::render(sf::RenderWindow* window) {
-    // std::cout << "Rendering MainMenuState..." << std::endl;
     window->clear();
     window->display();
 }
