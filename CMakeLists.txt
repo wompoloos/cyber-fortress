@@ -13,6 +13,7 @@ project(cyber-fortress-ver-1.0)
 set(SOURCE_DIR "${PROJECT_SOURCE_DIR}/src/")
 set(SOURCE_INCS "${PROJECT_SOURCE_DIR}/include/")
 
+
 # Main output directory
 set(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
 
@@ -23,10 +24,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
 add_subdirectory("lib/sfml")
 set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
+include_directories(/lib/sfml)
 
 add_subdirectory("lib/b2d/Box2D")
 set(B2D_INCS "lib/b2d/Box2D/")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
+include_directories(/lib/b2d)
+
 
 
 #### Cyber Fortress ####
