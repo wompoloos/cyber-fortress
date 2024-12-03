@@ -16,7 +16,7 @@ SplashState::~SplashState() {
 void SplashState::init() {
     std::cout << "Initialisng SplashState..." << std::endl;
     // Load the splash texture from a file
-    splashTexture.loadFromFile("../res/images/splashScreen.png");
+    splashTexture.loadFromFile("../res/images/screens/splashScreen.png");
     // Set the texture for the sprite
     splashSprite.setTexture(splashTexture);
 }

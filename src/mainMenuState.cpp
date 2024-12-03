@@ -15,6 +15,24 @@ MainMenuState::~MainMenuState() {
 // Intiliase the state   
 void MainMenuState::init() {
 	std::cout << "Initialisng MainMenuState..." << std::endl;
+    // Background
+    menuTexture.loadFromFile("../res/images/screens/menuScreen.png");
+    menuSprite.setTexture(menuTexture);
+    // Play
+    menuPlayTexture.loadFromFile("../res/images/ui/menuPlay.png");
+    menuPlaySprite.setTexture(menuPlayTexture);
+    menuPlaySprite.setPosition(sf::Vector2f(93.f, 199.f));
+    menuSprites.push_back(menuPlaySprite);
+    // Options
+    menuOptionsTexture.loadFromFile("../res/images/ui/menuOptions.png");
+    menuOptionsSprite.setTexture(menuOptionsTexture);
+    menuOptionsSprite.setPosition(sf::Vector2f(263.f, 199.f));
+    menuSprites.push_back(menuOptionsSprite);
+    // Quit
+    menuQuitTexture.loadFromFile("../res/images/ui/menuQuit.png");
+    menuQuitSprite.setTexture(menuQuitTexture);
+    menuQuitSprite.setPosition(sf::Vector2f(483.f, 199.f));
+    menuSprites.push_back(menuQuitSprite);
 }
 
 // Poll events
@@ -30,26 +48,24 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
                 window->close();
             }
             if (event.key.code == sf::Keyboard::Up) {
-                if (menuOptionsIndex > 0) {
-                    menuOptionsIndex--;
+                if (menuChoicesIndex > 0) {
+                    menuChoicesIndex--;
                 }
             }
             if (event.key.code == sf::Keyboard::Down) {
-                if (menuOptionsIndex < menuOptions.size() - 1) {
-                    menuOptionsIndex++;
+                if (menuChoicesIndex < menuChoices.size() - 1) {
+                    menuChoicesIndex++;
+                    menuSprites[menuChoicesIndex].setColor(sf::Color::White);
                 }
             }
             if (event.key.code == sf::Keyboard::Enter) {
-                switch (menuOptionsIndex) {
+                switch (menuChoicesIndex) {
                 case 0:
-                    std::cout << menuOptions[menuOptionsIndex] << std::endl;
                     stateManager.changeState(std::make_unique<gamePlayState>(stateManager));
                     break;
                 case 1:
-                    std::cout << menuOptions[menuOptionsIndex] << std::endl;
                     break;
                 case 2:
-                    std::cout << menuOptions[menuOptionsIndex] << std::endl;
                     break;
                 }
             break;
@@ -60,15 +76,29 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
 
 // Update
 void MainMenuState::update() {
+    // Show selected menu choice
+    for (std::size_t i = 0; i < menuSprites.size(); ++i) {
+        if (i == menuChoicesIndex) {
+            // Highlight current choice in white
+            menuSprites[i].setColor(sf::Color(255, 255, 255, 255));
+        }
+        else {
+            // Reset colour of other choices to green
+            menuSprites[i].setColor(sf::Color(8, 255, 8, 255));
+        }
+    }
 }
 
 // Render
 void MainMenuState::render(sf::RenderWindow* window) {
-<<<<<<< HEAD
-=======
     // std::cout << "Rendering MainMenuState..." << std::endl;
-
->>>>>>> 40a5606e04e3229a32dabf717a5b3de18e8b1827
     window->clear();
+    // Draw the menu sprite
+    window->draw(menuSprite);
+    // Draw sprites
+    for (const auto& sprite : menuSprites) {
+        window->draw(sprite);
+    }
+    // Display the window
     window->display();
 }
