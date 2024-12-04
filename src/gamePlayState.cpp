@@ -1,4 +1,5 @@
 #include "gamePlayState.h"
+#include "escapeMenuState.h"
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include <vector>
@@ -6,7 +7,7 @@
 using namespace sf;
 
 gamePlayState::gamePlayState(StateManager& stateManager)
-    : stateManager(stateManager){  // Set the background color to blue
+    : stateManager(stateManager){ 
 }
 
 gamePlayState::~gamePlayState() {
@@ -130,8 +131,9 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
         if (event.type == sf::Event::Closed) {
             window->close();  // Close the window if the user clicks the close button
         }
-
-        // Handle other events like player input for gameplay here
+        if (event.key.code == sf::Keyboard::Escape) {
+            stateManager.changeState(std::make_unique<escapeMenuState>(stateManager));
+        }
     }
 }
 

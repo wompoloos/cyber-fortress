@@ -2,10 +2,12 @@
 #include "mainMenuState.h"
 #include "stateManager.h"
 #include "gamePlayState.h"
+#include "settingState.h"
 
 // Public functions
 // Constructors
-MainMenuState::MainMenuState(StateManager& stateManager) : stateManager(stateManager) {
+MainMenuState::MainMenuState(StateManager& stateManager) 
+    : stateManager(stateManager) {
 }
 
 // Destructors
@@ -47,12 +49,12 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
-            if (event.key.code == sf::Keyboard::Up) {
+            if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Up) {
                 if (menuChoicesIndex > 0) {
                     menuChoicesIndex--;
                 }
             }
-            if (event.key.code == sf::Keyboard::Down) {
+            if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::Down) {
                 if (menuChoicesIndex < menuChoices.size() - 1) {
                     menuChoicesIndex++;
                     menuSprites[menuChoicesIndex].setColor(sf::Color::White);
@@ -64,8 +66,10 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
                     stateManager.changeState(std::make_unique<gamePlayState>(stateManager));
                     break;
                 case 1:
+                    stateManager.changeState(std::make_unique<settingState>(stateManager));
                     break;
                 case 2:
+                    exit(0);
                     break;
                 }
             break;
