@@ -8,6 +8,23 @@ class settingState : public State {
 private:
     StateManager& stateManager ;
 
+    sf::Texture settingsTexture;
+    sf::Sprite settingsSprite;
+
+    sf::Texture videoTexture;
+    sf::Sprite videoSprite;
+
+    sf::Texture controlsTexture;
+    sf::Sprite controlsSprite;
+
+    sf::Texture soundTexture;
+    sf::Sprite soundSprite;
+
+
+    std::vector<std::string> settingsChoices = { "Video", "Controls", "Sound" };
+    std::vector<sf::Sprite> settingsSprites = { };
+    int settingsChoicesIndex = 0;
+
 public:
 
     settingState(StateManager& stateManager);

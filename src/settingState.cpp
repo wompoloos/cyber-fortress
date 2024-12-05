@@ -16,15 +16,38 @@ settingState::~settingState() {
 
 // Initialize the settings state (setting up resources, etc.)
 void settingState::init() {
+    std::cout << "Settings..." << std::endl;
+
+    settingsTexture.setSrgb(0);
+
+    videoTexture.loadFromFile("../res/images/ui/settingsVideo.png");
+    videoSprite.setTexture(videoTexture);
+    videoSprite.setPosition(sf::Vector2f(20.f, 20.f));
+    settingsSprites.push_back(videoSprite);
+
+    controlsTexture.loadFromFile("../res/images/ui/settingsControl.png");
+    controlsSprite.setTexture(controlsTexture);
+    controlsSprite.setPosition(sf::Vector2f(190.f, 20.f));
+    settingsSprites.push_back(controlsSprite);
+
+    soundTexture.loadFromFile("../res/images/ui/settingsSound.png");
+    soundSprite.setTexture(soundTexture);
+    soundSprite.setPosition(sf::Vector2f(360.f, 20.f));
+    settingsSprites.push_back(soundSprite);
 }
 
 void settingState::pollEvents(sf::RenderWindow* window)
 {
     sf::Event event;
     while (window->pollEvent(event)) {
+        switch (event.type) {
+        case sf::Event::Closed:
+            window->close();
+            break;
             if (event.key.code == sf::Keyboard::Escape) {
-                stateManager.changeState(std::make_unique<MainMenuState>(stateManager));
+                stateManager.popState();
             }
+        }
     }
 }
 

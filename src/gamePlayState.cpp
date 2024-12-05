@@ -132,6 +132,7 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
             window->close();  // Close the window if the user clicks the close button
         }
         if (event.key.code == sf::Keyboard::Escape) {
+            stateManager.pushState(std::make_unique<escapeMenuState>(stateManager));
             stateManager.changeState(std::make_unique<escapeMenuState>(stateManager));
         }
     }

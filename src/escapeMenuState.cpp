@@ -22,7 +22,7 @@ void escapeMenuState::init() {
     escapeTexture.loadFromFile("../res/images/screens/menuScreen.png");
     escapeSprite.setTexture(escapeTexture);
     // Play
-    escapePlayTexture.loadFromFile("../res/images/ui/menuPlay.png");
+    escapePlayTexture.loadFromFile("../res/images/ui/pauseResume.png");
     escapePlaySprite.setTexture(escapePlayTexture);
     escapePlaySprite.setPosition(sf::Vector2f(93.f, 199.f));
     escapeSprites.push_back(escapePlaySprite);
