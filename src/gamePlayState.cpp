@@ -4,6 +4,7 @@
 #include <Box2D/Box2D.h>
 #include <vector>
 #include <iostream>
+
 using namespace sf;
 
 gamePlayState::gamePlayState(StateManager& stateManager)
@@ -125,6 +126,15 @@ b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const RectangleShap
     return CreatePhysicsBox(world, dynamic, rs.getPosition(), rs.getSize());
 }
 
+void gamePlayState::onPause() {
+    isPaused = true;
+}
+
+void gamePlayState::onResume() {
+    isPaused = false;
+}
+
+
 void gamePlayState::pollEvents(sf::RenderWindow* window) {
     sf::Event event;
     while (window->pollEvent(event)) {
@@ -132,8 +142,12 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
             window->close();  // Close the window if the user clicks the close button
         }
         if (event.key.code == sf::Keyboard::Escape) {
-            stateManager.pushState(std::make_unique<pauseMenuState>(stateManager));
-            stateManager.changeState(std::make_unique<pauseMenuState>(stateManager));
+            if (isPaused) {
+                stateManager.pushState(std::make_unique<pauseMenuState>(stateManager));
+            }
+            else {
+                onPause();
+            }
         }
     }
 }

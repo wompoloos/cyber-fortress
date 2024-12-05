@@ -18,6 +18,12 @@ public:
 	// Intiliase the state (to be implemented in derived classes)
 	virtual void init() = 0;
 
+	// Pause (to be implemented in derived classes)
+	virtual void onPause() {}
+
+	// Resume (to be implemented in derived classes)
+	virtual void onResume() {}
+
 	// Poll events (to be implemented in derived classes)
 	virtual void pollEvents(sf::RenderWindow* window) = 0;
 
@@ -25,6 +31,6 @@ public:
 	virtual void update() = 0;
 
 	// Render (to be implemented in derived classes)
-	virtual void render(sf::RenderWindow* window) = 0;
+	virtual void render(sf::RenderWindow* window) = 0;	
 };
 

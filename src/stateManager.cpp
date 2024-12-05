@@ -1,4 +1,5 @@
 #include "stateManager.h"
+#include <iostream>
 
 // Public functions
 // Constructors
@@ -27,6 +28,10 @@ void StateManager::popState() {
     if (!states.empty()) {
         // Remove the top state from the stack
         states.pop();
+        // Resume state if stack not empty
+        if (!states.empty()) {
+            states.top()->onResume();
+        }
     }
 }
 

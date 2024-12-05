@@ -29,7 +29,7 @@ void pauseMenuState::init() {
     // Options
     pauseOptionsTexture.loadFromFile("../res/images/ui/menuOptions.png");
     pauseOptionsSprite.setTexture(pauseOptionsTexture);
-    pauseOptionsSprite.setPosition(sf::Vector2f(263.f, 199.f));
+    pauseOptionsSprite.setPosition(sf::Vector2f(274.f, 199.f));
     pauseSprites.push_back(pauseOptionsSprite);
     // Quit
     pauseQuitTexture.loadFromFile("../res/images/ui/menuQuit.png");
