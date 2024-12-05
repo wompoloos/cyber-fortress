@@ -19,7 +19,7 @@ pauseMenuState::~pauseMenuState() {
 void pauseMenuState::init() {
     std::cout << "pause Menu..." << std::endl;
     // Background
-    pauseTexture.loadFromFile("../res/images/screens/menuScreen.png");
+    pauseTexture.loadFromFile("../res/images/screens/pauseScreen.png");
     pauseSprite.setTexture(pauseTexture);
     // Play
     pausePlayTexture.loadFromFile("../res/images/ui/pauseResume.png");
