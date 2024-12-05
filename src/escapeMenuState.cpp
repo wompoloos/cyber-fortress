@@ -2,43 +2,43 @@
 #include "settingState.h"
 #include "stateManager.h" 
 #include "mainMenuState.h"
-#include "escapeMenuState.h"
+#include "pauseMenuState.h"
 #include <SFML/Graphics.hpp>
 
 // Constructor that initializes the StateManager reference
-escapeMenuState::escapeMenuState(StateManager& stateManager)
+pauseMenuState::pauseMenuState(StateManager& stateManager)
     : stateManager(stateManager) {
 
 }
 
 // Destructor - clean up any dynamic resources if needed (none in this case)
-escapeMenuState::~escapeMenuState() {
+pauseMenuState::~pauseMenuState() {
 }
 
 // Initialize the settings state (setting up resources, etc.)
-void escapeMenuState::init() {
-    std::cout << "Escape Menu..." << std::endl;
+void pauseMenuState::init() {
+    std::cout << "pause Menu..." << std::endl;
     // Background
-    escapeTexture.loadFromFile("../res/images/screens/menuScreen.png");
-    escapeSprite.setTexture(escapeTexture);
+    pauseTexture.loadFromFile("../res/images/screens/menuScreen.png");
+    pauseSprite.setTexture(pauseTexture);
     // Play
-    escapePlayTexture.loadFromFile("../res/images/ui/pauseResume.png");
-    escapePlaySprite.setTexture(escapePlayTexture);
-    escapePlaySprite.setPosition(sf::Vector2f(93.f, 199.f));
-    escapeSprites.push_back(escapePlaySprite);
+    pausePlayTexture.loadFromFile("../res/images/ui/pauseResume.png");
+    pausePlaySprite.setTexture(pausePlayTexture);
+    pausePlaySprite.setPosition(sf::Vector2f(93.f, 199.f));
+    pauseSprites.push_back(pausePlaySprite);
     // Options
-    escapeOptionsTexture.loadFromFile("../res/images/ui/menuOptions.png");
-    escapeOptionsSprite.setTexture(escapeOptionsTexture);
-    escapeOptionsSprite.setPosition(sf::Vector2f(263.f, 199.f));
-    escapeSprites.push_back(escapeOptionsSprite);
+    pauseOptionsTexture.loadFromFile("../res/images/ui/menuOptions.png");
+    pauseOptionsSprite.setTexture(pauseOptionsTexture);
+    pauseOptionsSprite.setPosition(sf::Vector2f(263.f, 199.f));
+    pauseSprites.push_back(pauseOptionsSprite);
     // Quit
-    escapeQuitTexture.loadFromFile("../res/images/ui/menuQuit.png");
-    escapeQuitSprite.setTexture(escapeQuitTexture);
-    escapeQuitSprite.setPosition(sf::Vector2f(483.f, 199.f));
-    escapeSprites.push_back(escapeQuitSprite);
+    pauseQuitTexture.loadFromFile("../res/images/ui/menuQuit.png");
+    pauseQuitSprite.setTexture(pauseQuitTexture);
+    pauseQuitSprite.setPosition(sf::Vector2f(483.f, 199.f));
+    pauseSprites.push_back(pauseQuitSprite);
 }
 
-void escapeMenuState::pollEvents(sf::RenderWindow* window)
+void pauseMenuState::pollEvents(sf::RenderWindow* window)
 {
     sf::Event event;
     while (window->pollEvent(event)) {
@@ -51,18 +51,18 @@ void escapeMenuState::pollEvents(sf::RenderWindow* window)
                 stateManager.popState();
             }
             if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Up) {
-                if (escapeChoicesIndex > 0) {
-                    escapeChoicesIndex--;
+                if (pauseChoicesIndex > 0) {
+                    pauseChoicesIndex--;
                 }
             }
             if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::Down) {
-                if (escapeChoicesIndex < escapeChoices.size() - 1) {
-                    escapeChoicesIndex++;
-                    escapeSprites[escapeChoicesIndex].setColor(sf::Color::White);
+                if (pauseChoicesIndex < pauseChoices.size() - 1) {
+                    pauseChoicesIndex++;
+                    pauseSprites[pauseChoicesIndex].setColor(sf::Color::White);
                 }
             }
             if (event.key.code == sf::Keyboard::Enter) {
-                switch (escapeChoicesIndex) {
+                switch (pauseChoicesIndex) {
                 case 0:
                     stateManager.popState();
                     break;
@@ -80,28 +80,28 @@ void escapeMenuState::pollEvents(sf::RenderWindow* window)
 }
 
 // Update the state (e.g., handle user input, etc.)
-void escapeMenuState::update() {
+void pauseMenuState::update() {
 
-    for (std::size_t i = 0; i < escapeSprites.size(); ++i) {
-        if (i == escapeChoicesIndex) {
+    for (std::size_t i = 0; i < pauseSprites.size(); ++i) {
+        if (i == pauseChoicesIndex) {
             // Highlight current choice in white
-            escapeSprites[i].setColor(sf::Color(255, 255, 255, 255));
+            pauseSprites[i].setColor(sf::Color(255, 255, 255, 255));
         }
         else {
             // Reset colour of other choices to green
-            escapeSprites[i].setColor(sf::Color(8, 255, 8, 255));
+            pauseSprites[i].setColor(sf::Color(8, 255, 8, 255));
         }
     }
 }
 
 
 // Render the screen (show the blue background)
-void escapeMenuState::render(sf::RenderWindow* window) {
-    window->clear(sf::Color::Blue);
+void pauseMenuState::render(sf::RenderWindow* window) {
+    window->clear(sf::Color::Black);
 
-    window->draw(escapeSprite);
+    window->draw(pauseSprite);
     // Draw sprites
-    for (const auto& sprite : escapeSprites) {
+    for (const auto& sprite : pauseSprites) {
         window->draw(sprite);
     }
     // You could render more UI elements here if desired (like buttons or text)

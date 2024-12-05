@@ -1,36 +1,36 @@
-// settingState.h
+// pauseMenuState.h
 #pragma once
 #include "state.h"
 
-class escapeMenuState : public State {
+class pauseMenuState : public State {
 private:
     StateManager& stateManager;
 
 	// Texture for the menu image
-	sf::Texture escapeTexture;
-	// Sprite for rendering the escape image
-	sf::Sprite escapeSprite;
+	sf::Texture pauseTexture;
+	// Sprite for rendering the pause image
+	sf::Sprite pauseSprite;
 	// Texture for play 
-	sf::Texture escapePlayTexture;
+	sf::Texture pausePlayTexture;
 	// Sprite for rendering play
-	sf::Sprite escapePlaySprite;
+	sf::Sprite pausePlaySprite;
 	// Texture for options 
-	sf::Texture escapeOptionsTexture;
+	sf::Texture pauseOptionsTexture;
 	// Sprite for rendering options
-	sf::Sprite escapeOptionsSprite;
+	sf::Sprite pauseOptionsSprite;
 	// Texture for quit 
-	sf::Texture escapeQuitTexture;
+	sf::Texture pauseQuitTexture;
 	// Sprite for rendering quit
-	sf::Sprite escapeQuitSprite;
+	sf::Sprite pauseQuitSprite;
 
-	std::vector<std::string> escapeChoices = { "Play", "Options", "Quit" };
-	std::vector<sf::Sprite> escapeSprites = { };
-	int escapeChoicesIndex = 0;
+	std::vector<std::string> pauseChoices = { "Play", "Options", "Quit" };
+	std::vector<sf::Sprite> pauseSprites = { };
+	int pauseChoicesIndex = 0;
 
 public:
 
-    escapeMenuState(StateManager& stateManager);
-    virtual ~escapeMenuState();
+    pauseMenuState(StateManager& stateManager);
+    virtual ~pauseMenuState();
 
     // Initialize the gameplay state (set up color and resources)
     void init() override;

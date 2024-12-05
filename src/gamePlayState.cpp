@@ -1,5 +1,5 @@
 #include "gamePlayState.h"
-#include "escapeMenuState.h"
+#include "pauseMenuState.h"
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include <vector>
@@ -132,8 +132,8 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
             window->close();  // Close the window if the user clicks the close button
         }
         if (event.key.code == sf::Keyboard::Escape) {
-            stateManager.pushState(std::make_unique<escapeMenuState>(stateManager));
-            stateManager.changeState(std::make_unique<escapeMenuState>(stateManager));
+            stateManager.pushState(std::make_unique<pauseMenuState>(stateManager));
+            stateManager.changeState(std::make_unique<pauseMenuState>(stateManager));
         }
     }
 }

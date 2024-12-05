@@ -53,15 +53,30 @@ void settingState::pollEvents(sf::RenderWindow* window)
 
 // Update the state (e.g., handle user input, etc.)
 void settingState::update() {
+    for (std::size_t i = 0; i < settingsSprites.size(); ++i) {
+        if (i == settingsChoicesIndex) {
+            // Highlight current choice in white
+            settingsSprites[i].setColor(sf::Color(255, 255, 255, 255));
+        }
+        else {
+            // Reset colour of other choices to green
+            settingsSprites[i].setColor(sf::Color(8, 255, 8, 255));
+        }
+    }
 }
 
 
 // Render the screen (show the blue background)
 void settingState::render(sf::RenderWindow* window) {
-    window->clear(sf::Color::Yellow);
+        window->clear(sf::Color::Blue);
 
-    // You could render more UI elements here if desired (like buttons or text)
-    // For now, we just display the blue background
+        window->draw(settingsSprite);
+        // Draw sprites
+        for (const auto& sprite : settingsSprites) {
+            window->draw(sprite);
+        }
+        // You could render more UI elements here if desired (like buttons or text)
+        // For now, we just display the blue background
 
-    window->display();  // Display the current frame
+        window->display();  // Display the current frame
 }
