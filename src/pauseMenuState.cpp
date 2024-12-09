@@ -21,20 +21,20 @@ void pauseMenuState::init() {
     // Background
     pauseTexture.loadFromFile("../res/images/screens/pauseScreen.png");
     pauseSprite.setTexture(pauseTexture);
-    // Play
-    pausePlayTexture.loadFromFile("../res/images/ui/pauseResume.png");
+    // Resume
+    pausePlayTexture.loadFromFile("../res/images/ui/menuResume.png");
     pausePlaySprite.setTexture(pausePlayTexture);
-    pausePlaySprite.setPosition(sf::Vector2f(93.f, 199.f));
+    pausePlaySprite.setPosition(sf::Vector2f(271.f, 169.f));
     pauseSprites.push_back(pausePlaySprite);
     // Options
     pauseOptionsTexture.loadFromFile("../res/images/ui/menuOptions.png");
     pauseOptionsSprite.setTexture(pauseOptionsTexture);
-    pauseOptionsSprite.setPosition(sf::Vector2f(274.f, 199.f));
+    pauseOptionsSprite.setPosition(sf::Vector2f(263.f, 205.f));
     pauseSprites.push_back(pauseOptionsSprite);
     // Quit
     pauseQuitTexture.loadFromFile("../res/images/ui/menuQuit.png");
     pauseQuitSprite.setTexture(pauseQuitTexture);
-    pauseQuitSprite.setPosition(sf::Vector2f(483.f, 199.f));
+    pauseQuitSprite.setPosition(sf::Vector2f(288.f, 241.f));
     pauseSprites.push_back(pauseQuitSprite);
 }
 
@@ -50,12 +50,12 @@ void pauseMenuState::pollEvents(sf::RenderWindow* window)
             if (event.key.code == sf::Keyboard::Escape) {
                 stateManager.popState();
             }
-            if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Up) {
+            if (event.key.code == sf::Keyboard::Up) {
                 if (pauseChoicesIndex > 0) {
                     pauseChoicesIndex--;
                 }
             }
-            if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::Down) {
+            if (event.key.code == sf::Keyboard::Down) {
                 if (pauseChoicesIndex < pauseChoices.size() - 1) {
                     pauseChoicesIndex++;
                     pauseSprites[pauseChoicesIndex].setColor(sf::Color::White);
@@ -95,17 +95,15 @@ void pauseMenuState::update() {
 }
 
 
-// Render the screen (show the blue background)
+// Render the screen
 void pauseMenuState::render(sf::RenderWindow* window) {
     window->clear(sf::Color::Black);
-
+    // Draw the pause sprite
     window->draw(pauseSprite);
     // Draw sprites
     for (const auto& sprite : pauseSprites) {
         window->draw(sprite);
     }
-    // You could render more UI elements here if desired (like buttons or text)
-    // For now, we just display the blue background
-
+    // Display the window
     window->display();  // Display the current frame
 }
