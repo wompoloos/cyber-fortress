@@ -1,16 +1,18 @@
-#include "gamePlayState.h"
-#include "pauseMenuState.h"
-#include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
 #include <vector>
 #include <iostream>
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
+#include "gamePlayState.h"
+#include "stateManager.h"
+#include "pauseMenuState.h"
 
-using namespace sf;
-
+// Public functions
+// Constructors
 gamePlayState::gamePlayState(StateManager& stateManager)
     : stateManager(stateManager){ 
 }
 
+// Destructors
 gamePlayState::~gamePlayState() {
 }
 
@@ -20,13 +22,13 @@ const float wallThickness = 50.0f;
 
 b2World* world;
 std::vector<b2Body*> bodies;
-std::vector<RectangleShape*> sprites;
+std::vector<sf::RectangleShape*> sprites;
 b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::Vector2f& position, const sf::Vector2f& size);
 b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::RectangleShape& rs);
 
-
+// Initialise the state
 void gamePlayState::init() {
-    // Initialization code for the gameplay state
+    // Initialisation code for the gameplay state
     const b2Vec2 gravity(0.0f, -10.0f);
 
     // Construct a world, which holds and simulates the physics bodies.
@@ -34,11 +36,11 @@ void gamePlayState::init() {
 
     for (int i = 1; i < 11; ++i) {
         // Create SFML shapes for each box
-        auto s = new RectangleShape();
-        s->setPosition(Vector2f(i * (gameWidth / 12.f), gameHeight * .7f));
-        s->setSize(Vector2f(50.0f, 50.0f));
-        s->setOrigin(Vector2f(25.0f, 25.0f));
-        s->setFillColor(Color::White);
+        auto s = new sf::RectangleShape();
+        s->setPosition(sf::Vector2f(i * (gameWidth / 12.f), gameHeight * .7f));
+        s->setSize(sf::Vector2f(50.0f, 50.0f));
+        s->setOrigin(sf::Vector2f(25.0f, 25.0f));
+        s->setFillColor(sf::Color::White);
         sprites.push_back(s);
 
         // Create a dynamic physics body for the box
@@ -86,20 +88,20 @@ const int32 velocityIterations = 6;
 const int32 positionIterations = 2;
 
 //Convert from b2Vec2 to a Vector2f
-inline const Vector2f bv2_to_sv2(const b2Vec2& in) {
-    return Vector2f(in.x * physics_scale, (in.y * physics_scale));
+inline const sf::Vector2f bv2_to_sv2(const b2Vec2& in) {
+    return sf::Vector2f(in.x * physics_scale, (in.y * physics_scale));
 }
 //Convert from Vector2f to a b2Vec2
-inline const b2Vec2 sv2_to_bv2(const Vector2f& in) {
+inline const b2Vec2 sv2_to_bv2(const sf::Vector2f& in) {
     return b2Vec2(in.x * physics_scale_inv, (in.y * physics_scale_inv));
 }
 //Convert from screenspace.y to physics.y (as they are the other way around)
-inline const Vector2f invert_height(const Vector2f& in) {
-    return Vector2f(in.x, gameHeight - in.y);
+inline const sf::Vector2f invert_height(const sf::Vector2f& in) {
+    return sf::Vector2f(in.x, gameHeight - in.y);
 }
 
 //Create a Box2D body with a box fixture
-b2Body* CreatePhysicsBox(b2World& World, const bool dynamic, const Vector2f& position, const Vector2f& size) {
+b2Body* CreatePhysicsBox(b2World& World, const bool dynamic, const sf::Vector2f& position, const sf::Vector2f& size) {
     b2BodyDef BodyDef;
     //Is Dynamic(moving), or static(Stationary)
     BodyDef.type = dynamic ? b2_dynamicBody : b2_staticBody;
@@ -122,19 +124,21 @@ b2Body* CreatePhysicsBox(b2World& World, const bool dynamic, const Vector2f& pos
 }
 
 // Create a Box2d body with a box fixture, from a sfml::RectangleShape
-b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const RectangleShape& rs) {
+b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::RectangleShape& rs) {
     return CreatePhysicsBox(world, dynamic, rs.getPosition(), rs.getSize());
 }
 
+// Pause state
 void gamePlayState::onPause() {
     isPaused = true;
 }
 
+// Resume state
 void gamePlayState::onResume() {
     isPaused = false;
 }
 
-
+// Poll events
 void gamePlayState::pollEvents(sf::RenderWindow* window) {
     sf::Event event;
     while (window->pollEvent(event)) {
@@ -152,6 +156,7 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
     }
 }
 
+// Update the state
 void gamePlayState::update() {
     // Update the game logic here (e.g., player movement, physics, etc.)
     static sf::Clock clock;
@@ -168,6 +173,7 @@ void gamePlayState::update() {
     }
 }
 
+// Render the screen
 void gamePlayState::render(sf::RenderWindow* window) {
     // You can render game objects here after clearing the window
     // Clear the window with a color (e.g., black)

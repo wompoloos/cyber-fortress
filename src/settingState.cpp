@@ -2,41 +2,41 @@
 #include "settingState.h"
 #include "stateManager.h" 
 #include "mainMenuState.h"
-#include <SFML/Graphics.hpp>
 
-// Constructor that initializes the StateManager reference
-settingState::settingState(StateManager& stateManager)
+// Public functions
+// Constructors
+SettingState::SettingState(StateManager& stateManager)
     : stateManager(stateManager){
-   
 }
 
-// Destructor - clean up any dynamic resources if needed (none in this case)
-settingState::~settingState() {
+// Destructors
+SettingState::~SettingState() {
 }
 
-// Initialize the settings state (setting up resources, etc.)
-void settingState::init() {
-    std::cout << "Settings..." << std::endl;
-
-    settingsTexture.setSrgb(0);
-
+// Initialise the state
+void SettingState::init() {
+    // Debug message
+    std::cout << "Initialising SettingState..." << std::endl;
+    // Load resources
+    // Video
     videoTexture.loadFromFile("../res/images/ui/settingsVideo.png");
     videoSprite.setTexture(videoTexture);
     videoSprite.setPosition(sf::Vector2f(20.f, 20.f));
     settingsSprites.push_back(videoSprite);
-
+    // Controls
     controlsTexture.loadFromFile("../res/images/ui/settingsControl.png");
     controlsSprite.setTexture(controlsTexture);
     controlsSprite.setPosition(sf::Vector2f(190.f, 20.f));
     settingsSprites.push_back(controlsSprite);
-
+    // Sound
     soundTexture.loadFromFile("../res/images/ui/settingsSound.png");
     soundSprite.setTexture(soundTexture);
     soundSprite.setPosition(sf::Vector2f(360.f, 20.f));
     settingsSprites.push_back(soundSprite);
 }
 
-void settingState::pollEvents(sf::RenderWindow* window)
+// Poll events
+void SettingState::pollEvents(sf::RenderWindow* window)
 {
     sf::Event event;
     while (window->pollEvent(event)) {
@@ -52,7 +52,7 @@ void settingState::pollEvents(sf::RenderWindow* window)
 }
 
 // Update the state (e.g., handle user input, etc.)
-void settingState::update() {
+void SettingState::update() {
     for (std::size_t i = 0; i < settingsSprites.size(); ++i) {
         if (i == settingsChoicesIndex) {
             // Highlight current choice in white
@@ -67,7 +67,7 @@ void settingState::update() {
 
 
 // Render the screen (show the blue background)
-void settingState::render(sf::RenderWindow* window) {
+void SettingState::render(sf::RenderWindow* window) {
         window->clear(sf::Color::Blue);
 
         window->draw(settingsSprite);

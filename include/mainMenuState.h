@@ -3,7 +3,7 @@
 #include "state.h"
 
 /*
-	This class represents the main menu screen state.
+	This class represents the main menu state.
 */
 
 // Forward declaration of StateManager class

@@ -16,7 +16,9 @@ MainMenuState::~MainMenuState() {
 
 // Intiliase the state   
 void MainMenuState::init() {
+    // Debug message
 	std::cout << "Initialisng MainMenuState..." << std::endl;
+    // Load resources
     // Background
     menuTexture.loadFromFile("../res/images/screens/menuScreen.png");
     menuSprite.setTexture(menuTexture);
@@ -49,12 +51,12 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
-            if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Up) {
+            if (event.key.code == sf::Keyboard::Left) {
                 if (menuChoicesIndex > 0) {
                     menuChoicesIndex--;
                 }
             }
-            if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::Down) {
+            if (event.key.code == sf::Keyboard::Right) {
                 if (menuChoicesIndex < menuChoices.size() - 1) {
                     menuChoicesIndex++;
                     menuSprites[menuChoicesIndex].setColor(sf::Color::White);
@@ -66,7 +68,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
                     stateManager.changeState(std::make_unique<gamePlayState>(stateManager));
                     break;
                 case 1:
-                    stateManager.changeState(std::make_unique<settingState>(stateManager));
+                    stateManager.changeState(std::make_unique<SettingState>(stateManager));
                     break;
                 case 2:
                     exit(0);
@@ -78,7 +80,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
     }
 }
 
-// Update
+// Update the state
 void MainMenuState::update() {
     // Show selected menu choice
     for (std::size_t i = 0; i < menuSprites.size(); ++i) {
@@ -93,13 +95,12 @@ void MainMenuState::update() {
     }
 }
 
-// Render
+// Render the screen
 void MainMenuState::render(sf::RenderWindow* window) {
-    // std::cout << "Rendering MainMenuState..." << std::endl;
     window->clear();
     // Draw the menu sprite
     window->draw(menuSprite);
-    // Draw sprites
+    // Draw choices sprites
     for (const auto& sprite : menuSprites) {
         window->draw(sprite);
     }

@@ -1,11 +1,18 @@
-// pauseMenuState.h
 #pragma once
+
 #include "state.h"
+
+/*
+	This class represents the pause menu state.
+*/
+
+// Forward declaration of StateManager class
+class StateManager;
 
 class pauseMenuState : public State {
 private:
     StateManager& stateManager;
-
+	bool isPaused = false;
 	// Texture for the menu image
 	sf::Texture pauseTexture;
 	// Sprite for rendering the pause image
@@ -22,26 +29,25 @@ private:
 	sf::Texture pauseQuitTexture;
 	// Sprite for rendering quit
 	sf::Sprite pauseQuitSprite;
-
+	// Choices for the menu
 	std::vector<std::string> pauseChoices = { "Play", "Options", "Quit" };
 	std::vector<sf::Sprite> pauseSprites = { };
 	int pauseChoicesIndex = 0;
 
 public:
-
+	// Constructor with reference to StateManager
     pauseMenuState(StateManager& stateManager);
     virtual ~pauseMenuState();
 
-    // Initialize the gameplay state (set up color and resources)
+    // Initialise the state
     void init() override;
 
-
-    // Poll events (to be implemented in derived classes)
+    // Poll events
     void pollEvents(sf::RenderWindow* window);
 
-    // Update gameplay logic (game state, player movement, etc.)
+    // Update
     void update() override;
 
-    // Render the window (with background color)
+    // Render
     void render(sf::RenderWindow* window) override;
 };

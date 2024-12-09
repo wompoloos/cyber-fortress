@@ -18,7 +18,7 @@ StateManager::~StateManager() {
 void StateManager::pushState(std::unique_ptr<State> state) {
     // Move the unique_ptr into the stack
     states.push(std::move(state));
-    // Initialize the new state
+    // Initialise the new state
     states.top()->init();
 }
 

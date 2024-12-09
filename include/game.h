@@ -8,7 +8,7 @@
 
 /*
 	Wrapper class for game engine.
-	This class handles the initialization and management of the game window.
+	This class handles the initialisation and management of the game window.
 */
 
 class Game {

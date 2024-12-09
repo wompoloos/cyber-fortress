@@ -1,23 +1,23 @@
 #include <iostream>
-#include "settingState.h"
-#include "stateManager.h" 
-#include "mainMenuState.h"
 #include "pauseMenuState.h"
-#include <SFML/Graphics.hpp>
+#include "stateManager.h"
+#include "settingState.h" 
 
-// Constructor that initializes the StateManager reference
+// Public functions
+// Constructors
 pauseMenuState::pauseMenuState(StateManager& stateManager)
     : stateManager(stateManager) {
-
 }
 
-// Destructor - clean up any dynamic resources if needed (none in this case)
+// Destructors
 pauseMenuState::~pauseMenuState() {
 }
 
-// Initialize the settings state (setting up resources, etc.)
+// Initialise the state
 void pauseMenuState::init() {
-    std::cout << "pause Menu..." << std::endl;
+    // Debug message
+    std::cout << "Initialising PauseMenuState..." << std::endl;
+    // Load resources
     // Background
     pauseTexture.loadFromFile("../res/images/screens/pauseScreen.png");
     pauseSprite.setTexture(pauseTexture);
@@ -38,6 +38,7 @@ void pauseMenuState::init() {
     pauseSprites.push_back(pauseQuitSprite);
 }
 
+// Poll events
 void pauseMenuState::pollEvents(sf::RenderWindow* window)
 {
     sf::Event event;
@@ -67,7 +68,7 @@ void pauseMenuState::pollEvents(sf::RenderWindow* window)
                     stateManager.popState();
                     break;
                 case 1:
-                    stateManager.changeState(std::make_unique<settingState>(stateManager));
+                    stateManager.changeState(std::make_unique<SettingState>(stateManager));
                     break;
                 case 2:
                     exit(0);
@@ -79,9 +80,9 @@ void pauseMenuState::pollEvents(sf::RenderWindow* window)
     }
 }
 
-// Update the state (e.g., handle user input, etc.)
+// Update the state
 void pauseMenuState::update() {
-
+    // Show the selected pause menu choice
     for (std::size_t i = 0; i < pauseSprites.size(); ++i) {
         if (i == pauseChoicesIndex) {
             // Highlight current choice in white
@@ -100,10 +101,10 @@ void pauseMenuState::render(sf::RenderWindow* window) {
     window->clear(sf::Color::Black);
     // Draw the pause sprite
     window->draw(pauseSprite);
-    // Draw sprites
+    // Draw choices sprites
     for (const auto& sprite : pauseSprites) {
         window->draw(sprite);
     }
     // Display the window
-    window->display();  // Display the current frame
+    window->display();
 }

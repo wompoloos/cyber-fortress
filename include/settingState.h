@@ -1,10 +1,15 @@
-// settingState.h
 #pragma once
-#include "state.h"
-#include "stateManager.h"
-#include <SFML/Graphics.hpp>
 
-class settingState : public State {
+#include "state.h"
+
+/*
+    This class represents the settings state.
+*/
+
+// Forward declaration of StateManager class
+class StateManager;
+
+class SettingState : public State {
 private:
     StateManager& stateManager ;
 
@@ -20,26 +25,26 @@ private:
     sf::Texture soundTexture;
     sf::Sprite soundSprite;
 
-
     std::vector<std::string> settingsChoices = { "Video", "Controls", "Sound" };
     std::vector<sf::Sprite> settingsSprites = { };
     int settingsChoicesIndex = 0;
 
 public:
+    // Constructor with reference to StateManager
+    SettingState(StateManager& stateManager);
 
-    settingState(StateManager& stateManager);
-    virtual ~settingState();
+    // Virtual destructor
+    virtual ~SettingState();
     
-    // Initialize the gameplay state (set up color and resources)
+    // Initialise the state
     void init() override;
 
-
-    // Poll events (to be implemented in derived classes)
+    // Poll events
     void pollEvents(sf::RenderWindow* window);
 
-    // Update gameplay logic (game state, player movement, etc.)
+    // Update
     void update() override;
 
-    // Render the window (with background color)
+    // Render
     void render(sf::RenderWindow* window) override;
 };

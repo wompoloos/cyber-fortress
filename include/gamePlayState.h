@@ -1,8 +1,13 @@
-// gameplay.h
 #pragma once
+
 #include "state.h"
-#include "stateManager.h"
-#include <SFML/Graphics.hpp>
+
+/*
+    This class represents the gameplay state.
+*/
+
+// Forward declaration of StateManager class
+class StateManager;
 
 class gamePlayState : public State {
 private:
@@ -12,9 +17,11 @@ private:
 public:
     // Constructor with reference to StateManager
     gamePlayState(StateManager& stateManager);
+
+    // Virtual destructor
     virtual ~gamePlayState();
         
-    // Initialize the gameplay state (set up color and resources)
+    // Initialise the state
     void init() override;
 
     // Pause
@@ -23,12 +30,12 @@ public:
     // Resume
     void onResume() override;
 
-    // Poll for events (keyboard input, window events)
+    // Poll events
     void pollEvents(sf::RenderWindow* window) override;
 
-    // Update gameplay logic (game state, player movement, etc.)
+    // Update
     void update() override;
 
-    // Render the window (with background color)
+    // Render
     void render(sf::RenderWindow* window) override;
 };
