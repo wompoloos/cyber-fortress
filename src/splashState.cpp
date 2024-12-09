@@ -41,11 +41,11 @@ void SplashState::pollEvents(sf::RenderWindow* window) {
     }
 }
 
-// Update
-void SplashState::update() {
+// Update the state
+void SplashState::update(float deltaTime) {
 }
 
-// Render
+// Render the screen
 void SplashState::render(sf::RenderWindow* window) {
     // Clear the window
     window->clear();

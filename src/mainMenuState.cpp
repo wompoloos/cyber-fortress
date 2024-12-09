@@ -81,7 +81,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
 }
 
 // Update the state
-void MainMenuState::update() {
+void MainMenuState::update(float deltaTime) {
     // Show selected menu choice
     for (std::size_t i = 0; i < menuSprites.size(); ++i) {
         if (i == menuChoicesIndex) {

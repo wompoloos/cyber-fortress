@@ -28,7 +28,7 @@ public:
 	virtual void pollEvents(sf::RenderWindow* window) = 0;
 
 	// Update (to be implemented in derived classes)
-	virtual void update() = 0;
+	virtual void update(float deltaTime) = 0;
 
 	// Render (to be implemented in derived classes)
 	virtual void render(sf::RenderWindow* window) = 0;	

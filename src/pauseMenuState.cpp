@@ -81,7 +81,7 @@ void PauseMenuState::pollEvents(sf::RenderWindow* window)
 }
 
 // Update the state
-void PauseMenuState::update() {
+void PauseMenuState::update(float deltaTime) {
     // Show the selected pause menu choice
     for (std::size_t i = 0; i < pauseSprites.size(); ++i) {
         if (i == pauseChoicesIndex) {

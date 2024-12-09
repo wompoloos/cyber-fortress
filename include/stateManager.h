@@ -13,6 +13,10 @@ class StateManager {
 private:
     // Stack to hold pointers to the current states
     std::stack<std::unique_ptr<State>> states;
+    // Fixed time step for updates
+    const float FIXED_TIME_STEP = 1.0f / 60.0f;
+    // Clock to track time
+    sf::Clock clock;
 
 public:
     // Default constructor

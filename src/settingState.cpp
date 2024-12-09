@@ -52,8 +52,8 @@ void SettingState::pollEvents(sf::RenderWindow* window)
     }
 }
 
-// Update the state (e.g., handle user input, etc.)
-void SettingState::update() {
+// Update the state
+void SettingState::update(float deltaTime) {
     for (std::size_t i = 0; i < settingsSprites.size(); ++i) {
         if (i == settingsChoicesIndex) {
             // Highlight current choice in white

@@ -31,7 +31,7 @@ public:
 	void pollEvents(sf::RenderWindow* window) override;
 
 	// Update
-	void update() override;
+	void update(float deltaTime) override;
 
 	// Render
 	void render(sf::RenderWindow* window) override;

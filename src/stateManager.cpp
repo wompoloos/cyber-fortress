@@ -50,11 +50,24 @@ void StateManager::pollEvents(sf::RenderWindow* window) {
     }
 }
 
-// Update the current state (should be called in the main game loop)
+// Update the current state
 void StateManager::update() {
     // Check if there is at least one state to update
     if (!states.empty()) {
-        states.top()->update();
+        // Accumulator for time
+        static float accumulator = 0.0f;
+        // Measure elapsed time
+        float frameTime = clock.restart().asSeconds();
+        // Accumulate time
+        accumulator += frameTime;
+        // Fixed update loop for handling time accumulation
+        while (accumulator >= FIXED_TIME_STEP) {
+            // Update the state
+            states.top()->update(FIXED_TIME_STEP);
+            // Reduce accumulator by fixed timestep
+            accumulator -= FIXED_TIME_STEP;
+        }
+        
     }
 }
 

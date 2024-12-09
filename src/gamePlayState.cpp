@@ -157,10 +157,9 @@ void GamePlayState::pollEvents(sf::RenderWindow* window) {
 }
 
 // Update the state
-void GamePlayState::update() {
+void GamePlayState::update(float deltaTime) {
     // Update the game logic here (e.g., player movement, physics, etc.)
-    static sf::Clock clock;
-    float dt = clock.restart().asSeconds();
+    float dt = deltaTime;
 
     // Step Physics world by dt (non-fixed timestep) - THIS DOES ALL THE ACTUAL SIMULATION, DON'T FORGET THIS!
     world->Step(dt, velocityIterations, positionIterations);
