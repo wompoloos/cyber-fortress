@@ -12,7 +12,6 @@ class StateManager;
 class PauseMenuState : public State {
 private:
     StateManager& stateManager;
-	bool isPaused = false;
 	// Texture for the menu image
 	sf::Texture pauseTexture;
 	// Sprite for rendering the pause image

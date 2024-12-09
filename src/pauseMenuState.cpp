@@ -68,7 +68,7 @@ void PauseMenuState::pollEvents(sf::RenderWindow* window)
                     stateManager.popState();
                     break;
                 case 1:
-                    stateManager.changeState(std::make_unique<SettingState>(stateManager));
+                    stateManager.pushState(std::make_unique<SettingState>(stateManager));
                     break;
                 case 2:
                     exit(0);

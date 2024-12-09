@@ -68,7 +68,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
                     stateManager.changeState(std::make_unique<GamePlayState>(stateManager));
                     break;
                 case 1:
-                    stateManager.changeState(std::make_unique<SettingState>(stateManager));
+                    stateManager.pushState(std::make_unique<SettingState>(stateManager));
                     break;
                 case 2:
                     exit(0);
