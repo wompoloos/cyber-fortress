@@ -5,16 +5,16 @@
 
 // Public functions
 // Constructors
-pauseMenuState::pauseMenuState(StateManager& stateManager)
+PauseMenuState::PauseMenuState(StateManager& stateManager)
     : stateManager(stateManager) {
 }
 
 // Destructors
-pauseMenuState::~pauseMenuState() {
+PauseMenuState::~PauseMenuState() {
 }
 
 // Initialise the state
-void pauseMenuState::init() {
+void PauseMenuState::init() {
     // Debug message
     std::cout << "Initialising PauseMenuState..." << std::endl;
     // Load resources
@@ -39,7 +39,7 @@ void pauseMenuState::init() {
 }
 
 // Poll events
-void pauseMenuState::pollEvents(sf::RenderWindow* window)
+void PauseMenuState::pollEvents(sf::RenderWindow* window)
 {
     sf::Event event;
     while (window->pollEvent(event)) {
@@ -81,7 +81,7 @@ void pauseMenuState::pollEvents(sf::RenderWindow* window)
 }
 
 // Update the state
-void pauseMenuState::update() {
+void PauseMenuState::update() {
     // Show the selected pause menu choice
     for (std::size_t i = 0; i < pauseSprites.size(); ++i) {
         if (i == pauseChoicesIndex) {
@@ -97,7 +97,7 @@ void pauseMenuState::update() {
 
 
 // Render the screen
-void pauseMenuState::render(sf::RenderWindow* window) {
+void PauseMenuState::render(sf::RenderWindow* window) {
     window->clear(sf::Color::Black);
     // Draw the pause sprite
     window->draw(pauseSprite);

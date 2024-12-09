@@ -8,12 +8,12 @@
 
 // Public functions
 // Constructors
-gamePlayState::gamePlayState(StateManager& stateManager)
+GamePlayState::GamePlayState(StateManager& stateManager)
     : stateManager(stateManager){ 
 }
 
 // Destructors
-gamePlayState::~gamePlayState() {
+GamePlayState::~GamePlayState() {
 }
 
 const float gameHeight = 340.0f;
@@ -27,7 +27,7 @@ b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::Vector2f&
 b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::RectangleShape& rs);
 
 // Initialise the state
-void gamePlayState::init() {
+void GamePlayState::init() {
     // Initialisation code for the gameplay state
     const b2Vec2 gravity(0.0f, -10.0f);
 
@@ -129,17 +129,17 @@ b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::Rectangle
 }
 
 // Pause state
-void gamePlayState::onPause() {
+void GamePlayState::onPause() {
     isPaused = true;
 }
 
 // Resume state
-void gamePlayState::onResume() {
+void GamePlayState::onResume() {
     isPaused = false;
 }
 
 // Poll events
-void gamePlayState::pollEvents(sf::RenderWindow* window) {
+void GamePlayState::pollEvents(sf::RenderWindow* window) {
     sf::Event event;
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
@@ -147,7 +147,7 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
         }
         if (event.key.code == sf::Keyboard::Escape) {
             if (isPaused) {
-                stateManager.pushState(std::make_unique<pauseMenuState>(stateManager));
+                stateManager.pushState(std::make_unique<PauseMenuState>(stateManager));
             }
             else {
                 onPause();
@@ -157,7 +157,7 @@ void gamePlayState::pollEvents(sf::RenderWindow* window) {
 }
 
 // Update the state
-void gamePlayState::update() {
+void GamePlayState::update() {
     // Update the game logic here (e.g., player movement, physics, etc.)
     static sf::Clock clock;
     float dt = clock.restart().asSeconds();
@@ -174,7 +174,7 @@ void gamePlayState::update() {
 }
 
 // Render the screen
-void gamePlayState::render(sf::RenderWindow* window) {
+void GamePlayState::render(sf::RenderWindow* window) {
     // You can render game objects here after clearing the window
     // Clear the window with a color (e.g., black)
     window->clear(sf::Color::Black);

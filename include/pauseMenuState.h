@@ -9,7 +9,7 @@
 // Forward declaration of StateManager class
 class StateManager;
 
-class pauseMenuState : public State {
+class PauseMenuState : public State {
 private:
     StateManager& stateManager;
 	bool isPaused = false;
@@ -36,8 +36,8 @@ private:
 
 public:
 	// Constructor with reference to StateManager
-    pauseMenuState(StateManager& stateManager);
-    virtual ~pauseMenuState();
+    PauseMenuState(StateManager& stateManager);
+    virtual ~PauseMenuState();
 
     // Initialise the state
     void init() override;

@@ -65,7 +65,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
             if (event.key.code == sf::Keyboard::Enter) {
                 switch (menuChoicesIndex) {
                 case 0:
-                    stateManager.changeState(std::make_unique<gamePlayState>(stateManager));
+                    stateManager.changeState(std::make_unique<GamePlayState>(stateManager));
                     break;
                 case 1:
                     stateManager.changeState(std::make_unique<SettingState>(stateManager));

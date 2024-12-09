@@ -9,17 +9,17 @@
 // Forward declaration of StateManager class
 class StateManager;
 
-class gamePlayState : public State {
+class GamePlayState : public State {
 private:
     StateManager& stateManager;
     bool isPaused = false;
     
 public:
     // Constructor with reference to StateManager
-    gamePlayState(StateManager& stateManager);
+    GamePlayState(StateManager& stateManager);
 
     // Virtual destructor
-    virtual ~gamePlayState();
+    virtual ~GamePlayState();
         
     // Initialise the state
     void init() override;
