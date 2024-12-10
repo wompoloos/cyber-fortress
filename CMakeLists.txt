@@ -14,7 +14,6 @@ set(SOURCE_DIR "${PROJECT_SOURCE_DIR}/src/")
 set(SOURCE_INCS "${PROJECT_SOURCE_DIR}/include/")
 include_directories(${SOURCE_INCS})
 
-
 # Main output directory
 set(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
 
@@ -27,13 +26,6 @@ set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 include_directories(/lib/sfml)
 
-add_subdirectory("lib/b2d/Box2D")
-set(B2D_INCS "lib/b2d/Box2D/")
-link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
-include_directories(/lib/b2d)
-
-
-
 #### Cyber Fortress ####
 # Source files
 file(GLOB_RECURSE SOURCES "${SOURCE_DIR}/*.cpp" "${SOURCE_INCS}/*.h")
@@ -44,7 +36,3 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 # Link the SFML libraries
 target_include_directories(${PROJECT_NAME} PRIVATE ${SFML_INCS})
 target_link_libraries(${PROJECT_NAME} sfml-graphics)
-
-# Link the Box2D libraries
-target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
-target_link_libraries(${PROJECT_NAME} Box2D sfml-graphics)

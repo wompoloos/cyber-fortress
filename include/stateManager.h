@@ -17,6 +17,8 @@ private:
     const float FIXED_TIME_STEP = 1.0f / 60.0f;
     // Clock to track time
     sf::Clock clock;
+    // Alpha for blending
+    float alpha;
 
 public:
     // Default constructor

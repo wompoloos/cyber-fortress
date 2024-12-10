@@ -46,7 +46,7 @@ void SplashState::update(float deltaTime) {
 }
 
 // Render the screen
-void SplashState::render(sf::RenderWindow* window) {
+void SplashState::render(sf::RenderWindow* window, float alpha) {
     // Clear the window
     window->clear();
     // Draw the splash sprite

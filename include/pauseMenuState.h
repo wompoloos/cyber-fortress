@@ -48,5 +48,5 @@ public:
     void update(float deltaTime) override;
 
     // Render
-    void render(sf::RenderWindow* window) override;
+    void render(sf::RenderWindow* window, float alpha) override;
 };

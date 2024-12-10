@@ -67,14 +67,15 @@ void StateManager::update() {
             // Reduce accumulator by fixed timestep
             accumulator -= FIXED_TIME_STEP;
         }
-        
+        // Calculate alpha for blending
+        alpha = accumulator / FIXED_TIME_STEP;
     }
 }
 
 // Render the current state onto the provided window
 void StateManager::render(sf::RenderWindow* window) {
     if (!states.empty()) {
-        states.top()->render(window);
+        states.top()->render(window, alpha);
     }
 }
 

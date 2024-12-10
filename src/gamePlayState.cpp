@@ -1,7 +1,4 @@
-#include <vector>
 #include <iostream>
-#include <Box2D/Box2D.h>
-#include <SFML/Graphics.hpp>
 #include "gamePlayState.h"
 #include "stateManager.h"
 #include "pauseMenuState.h"
@@ -16,116 +13,24 @@ GamePlayState::GamePlayState(StateManager& stateManager)
 GamePlayState::~GamePlayState() {
 }
 
-const float gameHeight = 340.0f;
-const float gameWidth = 640.0f;
-const float wallThickness = 50.0f;
-
-b2World* world;
-std::vector<b2Body*> bodies;
-std::vector<sf::RectangleShape*> sprites;
-b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::Vector2f& position, const sf::Vector2f& size);
-b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::RectangleShape& rs);
-
 // Initialise the state
 void GamePlayState::init() {
-    // Initialisation code for the gameplay state
-    const b2Vec2 gravity(0.0f, -10.0f);
+    // Debug message
+    std::cout << "Initialisng GamePlayState..." << std::endl;
 
-    // Construct a world, which holds and simulates the physics bodies.
-    world = new b2World(gravity);
+    // Circles
+    circle1.setRadius(20); // radius of the circle
+    circle1.setFillColor(sf::Color::White); // set the color
+    circle1.setPosition(50, 100); // set position
 
-    for (int i = 1; i < 11; ++i) {
-        // Create SFML shapes for each box
-        auto s = new sf::RectangleShape();
-        s->setPosition(sf::Vector2f(i * (gameWidth / 12.f), gameHeight * .7f));
-        s->setSize(sf::Vector2f(50.0f, 50.0f));
-        s->setOrigin(sf::Vector2f(25.0f, 25.0f));
-        s->setFillColor(sf::Color::White);
-        sprites.push_back(s);
+    circles.push_back(circle1);
+    currentPositions.push_back(circle1.getPosition());
+    previousPositions.push_back(circle1.getPosition());
+    velocities.push_back(vel);
 
-        // Create a dynamic physics body for the box
-        auto b = CreatePhysicsBox(*world, true, *s);
-        // Give the box a spin
-        b->ApplyAngularImpulse(5.0f, true);
-        bodies.push_back(b);
-    }
-
-    // Wall Dimensions
-    std::vector<sf::Vector2f> wallPositions = {
-        {gameWidth / 2.0f, wallThickness / 2.0f},                      // Top
-        {gameWidth / 2.0f, gameHeight - wallThickness / 2.0f},       // Bottom
-        {wallThickness / 2.0f, gameHeight / 2.0f},                     // Left
-        {gameWidth - wallThickness / 2.0f, gameHeight / 2.0f}        // Right
-    };
-
-    std::vector<sf::Vector2f> wallSizes = {
-        {gameWidth, wallThickness},                                    // Top
-        {gameWidth, wallThickness},                                    // Bottom
-        {wallThickness, gameHeight},                                   // Left
-        {wallThickness, gameHeight}                                    // Right
-    };
-
-    for (size_t i = 0; i < wallPositions.size(); ++i) {
-        // Create SFML RectangleShape for each wall
-        auto s = new sf::RectangleShape();
-        s->setSize(wallSizes[i]);
-        s->setOrigin(wallSizes[i] / 2.0f);  // Center the origin
-        s->setFillColor(sf::Color::Blue);
-        s->setPosition(wallPositions[i]);
-        sprites.push_back(s);
-
-        // Create a static physics body for the wall
-        auto b = CreatePhysicsBox(*world, false, s->getPosition(), s->getSize());
-        bodies.push_back(b);
-    }
-}
-// 1 sfml unit = 30 physics units
-const float physics_scale = 30.0f;
-// inverse of physics_scale, useful for calculations
-const float physics_scale_inv = 1.0f / physics_scale;
-// Magic numbers for accuracy of physics simulation
-const int32 velocityIterations = 6;
-const int32 positionIterations = 2;
-
-//Convert from b2Vec2 to a Vector2f
-inline const sf::Vector2f bv2_to_sv2(const b2Vec2& in) {
-    return sf::Vector2f(in.x * physics_scale, (in.y * physics_scale));
-}
-//Convert from Vector2f to a b2Vec2
-inline const b2Vec2 sv2_to_bv2(const sf::Vector2f& in) {
-    return b2Vec2(in.x * physics_scale_inv, (in.y * physics_scale_inv));
-}
-//Convert from screenspace.y to physics.y (as they are the other way around)
-inline const sf::Vector2f invert_height(const sf::Vector2f& in) {
-    return sf::Vector2f(in.x, gameHeight - in.y);
-}
-
-//Create a Box2D body with a box fixture
-b2Body* CreatePhysicsBox(b2World& World, const bool dynamic, const sf::Vector2f& position, const sf::Vector2f& size) {
-    b2BodyDef BodyDef;
-    //Is Dynamic(moving), or static(Stationary)
-    BodyDef.type = dynamic ? b2_dynamicBody : b2_staticBody;
-    BodyDef.position = sv2_to_bv2(position);
-    //Create the body
-    b2Body* body = World.CreateBody(&BodyDef);
-
-    //Create the fixture shape
-    b2PolygonShape Shape;
-    Shape.SetAsBox(sv2_to_bv2(size).x * 0.5f, sv2_to_bv2(size).y * 0.5f);
-    b2FixtureDef FixtureDef;
-    //Fixture properties
-    FixtureDef.density = dynamic ? 10.f : 0.f;
-    FixtureDef.friction = dynamic ? 0.8f : 1.f;
-    FixtureDef.restitution = 1.0;
-    FixtureDef.shape = &Shape;
-    //Add to body
-    body->CreateFixture(&FixtureDef);
-    return body;
-}
-
-// Create a Box2d body with a box fixture, from a sfml::RectangleShape
-b2Body* CreatePhysicsBox(b2World& world, const bool dynamic, const sf::RectangleShape& rs) {
-    return CreatePhysicsBox(world, dynamic, rs.getPosition(), rs.getSize());
+    circle2.setRadius(20); // radius of the circle
+    circle2.setFillColor(sf::Color::Red); // set the color
+    circle2.setPosition(50, 200); // set position
 }
 
 // Pause state
@@ -159,29 +64,37 @@ void GamePlayState::pollEvents(sf::RenderWindow* window) {
 // Update the state
 void GamePlayState::update(float deltaTime) {
     // Update the game logic here (e.g., player movement, physics, etc.)
-    float dt = deltaTime;
+    float dt = deltaTime; // Store the delta time for usage
 
-    // Step Physics world by dt (non-fixed timestep) - THIS DOES ALL THE ACTUAL SIMULATION, DON'T FORGET THIS!
-    world->Step(dt, velocityIterations, positionIterations);
-
-    for (int i = 0; i < bodies.size(); ++i) {
-        // Sync Sprites to physics position
-        sprites[i]->setPosition(invert_height(bv2_to_sv2(bodies[i]->GetPosition())));
-        // Sync Sprites to physics Rotation
-        sprites[i]->setRotation((180 / b2_pi) * bodies[i]->GetAngle());
+    // Update vector of circles
+    for (size_t i = 0; i < circles.size(); ++i) {
+        // Update previous position
+        previousPositions[i] = currentPositions[i];
+        // Update current position based on the velocity
+        currentPositions[i].x += velocities[i] * dt;
+        // Set the new position for the circle
+        circles[i].setPosition(currentPositions[i]);
     }
+
+    // Move circle2 based on an independent velocity
+    circle2.move(vel * dt, 0); // Assuming vel is a float representing the horizontal speed
 }
 
 // Render the screen
-void GamePlayState::render(sf::RenderWindow* window) {
-    // You can render game objects here after clearing the window
-    // Clear the window with a color (e.g., black)
+void GamePlayState::render(sf::RenderWindow* window, float alpha) {
+    // Clear the window
     window->clear(sf::Color::Black);
 
-    // Draw all sprites
-    for (auto sprite : sprites) {
-        window->draw(*sprite);
+    // Draw circles vector
+    for (size_t i = 0; i < circles.size(); ++i) {
+        // Interpolate position
+        sf::Vector2f blendedPosition = currentPositions[i] * alpha + previousPositions[i] * (1.0f - alpha);
+        circles[i].setPosition(blendedPosition); // Set the blended position for rendering
+        window->draw(circles[i]); // Draw the circle
     }
+    
+    // Render uninterpolated circle
+    window->draw(circle2);
 
     // Display the window contents
     window->display();
