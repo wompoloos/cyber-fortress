@@ -1,7 +1,7 @@
 #include <iostream>
 #include "mainMenuState.h"
 #include "stateManager.h"
-#include "gamePlayState.h"
+#include "testing.h"
 #include "settingState.h"
 
 // Public functions
@@ -65,7 +65,7 @@ void MainMenuState::pollEvents(sf::RenderWindow* window) {
             if (event.key.code == sf::Keyboard::Enter) {
                 switch (menuChoicesIndex) {
                 case 0:
-                    stateManager.changeState(std::make_unique<GamePlayState>(stateManager));
+                    stateManager.changeState(std::make_unique<testingState>(stateManager));
                     break;
                 case 1:
                     stateManager.pushState(std::make_unique<SettingState>(stateManager));

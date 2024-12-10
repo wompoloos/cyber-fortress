@@ -12,6 +12,7 @@ project(cyber-fortress-ver-1.0)
 # Source directory
 set(SOURCE_DIR "${PROJECT_SOURCE_DIR}/src/")
 set(SOURCE_INCS "${PROJECT_SOURCE_DIR}/include/")
+include_directories(${SOURCE_INCS})
 
 
 # Main output directory
