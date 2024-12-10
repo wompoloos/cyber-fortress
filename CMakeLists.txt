@@ -11,8 +11,8 @@ project(cyber-fortress-ver-1.0)
 #### Setup Directories ####
 # Source directory
 set(SOURCE_DIR "${PROJECT_SOURCE_DIR}/src/")
-set(SOURCE_INCS "${PROJECT_SOURCE_DIR}/include/")
-
+set(SOURCE_INCS "${PROJECT_SOURCE_DIR}/include")
+include_directories(${SOURCE_INCS})
 
 # Main output directory
 set(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
