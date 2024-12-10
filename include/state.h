@@ -31,6 +31,6 @@ public:
 	virtual void update(float deltaTime) = 0;
 
 	// Render (to be implemented in derived classes)
-	virtual void render(sf::RenderWindow* window) = 0;	
+	virtual void render(sf::RenderWindow* window, float alpha) = 0;	
 };
 

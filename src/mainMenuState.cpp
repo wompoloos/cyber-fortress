@@ -96,7 +96,7 @@ void MainMenuState::update(float deltaTime) {
 }
 
 // Render the screen
-void MainMenuState::render(sf::RenderWindow* window) {
+void MainMenuState::render(sf::RenderWindow* window, float alpha) {
     window->clear();
     // Draw the menu sprite
     window->draw(menuSprite);

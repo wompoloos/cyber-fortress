@@ -68,7 +68,7 @@ void SettingState::update(float deltaTime) {
 
 
 // Render the screen (show the blue background)
-void SettingState::render(sf::RenderWindow* window) {
+void SettingState::render(sf::RenderWindow* window, float alpha) {
         window->clear(sf::Color::Blue);
 
         window->draw(settingsSprite);

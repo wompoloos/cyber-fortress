@@ -97,7 +97,7 @@ void PauseMenuState::update(float deltaTime) {
 
 
 // Render the screen
-void PauseMenuState::render(sf::RenderWindow* window) {
+void PauseMenuState::render(sf::RenderWindow* window, float alpha) {
     window->clear(sf::Color::Black);
     // Draw the pause sprite
     window->draw(pauseSprite);
