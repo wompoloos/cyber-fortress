@@ -11,8 +11,6 @@
 	This class handles the initialisation and management of the game window.
 */
 
-
-
 class Game {
 private:
 	// Window
